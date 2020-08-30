@@ -1,0 +1,15 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.TagMapper">
+
+    <select id="findAll" resultType="Tag">
+        select * from t_tag
+    </select>
+
+    <insert id="save" parameterType="Tag" useGeneratedKeys="true" keyProperty="id">
+        insert into t_tag values(#{id},#{name},#{type},#{createtime})
+    </insert>
+
+    <select id="findByType" parameterType="string" resultType="com.pojo.Tag">
+        select id,name,type,createtime from t_tag where type=#{type}
+    </select>
+</mapper>

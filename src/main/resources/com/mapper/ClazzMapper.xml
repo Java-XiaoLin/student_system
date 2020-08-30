@@ -1,0 +1,38 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ClassMapper">
+
+    <!--用来手动指定mybatis如何封装结果
+        id:resultMap的唯一标识，全局唯一
+        type:当前封装结果的类型
+    -->
+    <resultMap id="clazzMap" type="com.pojo.Clazz">
+        <!--id用来封装主键的,这些封装的是Clazz对象-->
+        <id column="id" property="id"/><!--多表连接查询的结果表中的id属性对应Clazz类下面的id属性值-->
+        <result column="name" property="name"/>
+        <result column="tagid" property="tagid"/>
+        <!--封装返回值中的对象类型数据，property写需要封装对象类型的属性名-->
+        <association property="tag" javaType="com.pojo.Tag">
+            <!--封装标签中的属性-->
+            <id column="tid" property="id"/>
+            <result column="tname" property="name"/>
+            <result column="type" property="type"/>
+            <result column="createtime" property="createtime"/>
+        </association>
+    </resultMap>
+
+<!--查询所有，resultMap的值对应的是resultMap标签中id属性值-->
+    <select id="findAll" resultMap="clazzMap">
+        select
+            c.id,c.name,c.tagid,
+            t.id tid,t.name tname,t.type,t.createtime
+            from t_clazz c
+            left join t_tag t
+            on c.tagid=t.id
+    </select>
+
+    <!--插入班级-->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into t_clazz values(#{id},#{name},#{tagid})
+    </insert>
+
+</mapper>

@@ -1,0 +1,27 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CityMapper">
+
+    <insert id="save" parameterType="com.pojo.City" keyProperty="id" useGeneratedKeys="true">
+        insert into t_city values(#{id},#{name},#{createtime},#{numbers})
+    </insert>
+
+    <select id="findAll" resultType="com.pojo.City">
+        select id,name,createtime,numbers from t_city
+    </select>
+    
+    <select id="findAllJSON" resultType="com.pojo.City">
+        select id,name,createtime,numbers from t_city
+    </select>
+
+    <select id="findById" resultType="com.pojo.City">
+        select id,name,createtime,numbers from t_city where id = #{id}
+    </select>
+    
+    <update id="update" parameterType="com.pojo.City">
+      update  t_city set numbers = #{numbers} where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        delete from t_city where id=#{id}
+    </delete>
+</mapper>

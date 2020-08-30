@@ -1,0 +1,13 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+
+
+    <insert id="save" parameterType="com.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user values (#{id},#{name},#{password},#{status},#{regtime},#{role})
+    </insert>
+
+    <select id="findByName" parameterType="string" resultType="com.pojo.User">
+        select * from t_user where name = #{name}
+    </select>
+
+</mapper>
