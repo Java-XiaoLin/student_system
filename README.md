@@ -1,1 +1,1 @@
-这是一个初级的springboot+jsp的练手项目，结合了ajax和多表连接查询
+这是一个初级的springboot+jsp的练手项目，结合了ajax和多表连接查询,后期会附上我的博客
